@@ -2,7 +2,7 @@ package client
 
 import (
 	"crypto/tls"
-	"github.com/escher-client/escher_api/escherClient"
+	"github.com/Portshift/escher-client/escher_api/escherClient"
 	"log"
 	"net/http"
 	"os"

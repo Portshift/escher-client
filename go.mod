@@ -1,4 +1,4 @@
-module github.com/escher-client
+module github.com/Portshift/escher-client
 
 go 1.17
 

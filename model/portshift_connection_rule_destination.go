@@ -1,7 +1,7 @@
 package model
 
 import (
-	"github.com/escher-client/escher_api/model"
+	"github.com/Portshift/escher-client/escher_api/model"
 )
 
 type ConnectionRuleDestination struct {

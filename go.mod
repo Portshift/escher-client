@@ -4,7 +4,6 @@ go 1.16
 
 require (
 	github.com/EscherAuth/escher v0.0.0-20200415232717-f57476610940
-	github.com/Portshift/escher-client v0.0.0-00010101000000-000000000000
 	github.com/go-openapi/errors v0.20.1
 	github.com/go-openapi/runtime v0.21.0
 	github.com/go-openapi/strfmt v0.21.1
@@ -14,7 +13,6 @@ require (
 )
 
 replace (
-	github.com/Portshift/escher-client => ../escher-client
 	github.com/go-openapi/errors => github.com/go-openapi/errors v0.19.4
 	github.com/go-openapi/runtime => github.com/go-openapi/runtime v0.19.15
 	github.com/go-openapi/strfmt => github.com/go-openapi/strfmt v0.19.5

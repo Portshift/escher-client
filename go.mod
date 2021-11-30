@@ -13,8 +13,8 @@ require (
 )
 
 replace (
-	github.com/go-openapi/errors => github.com/go-openapi/errors v0.19.4
-	github.com/go-openapi/runtime => github.com/go-openapi/runtime v0.19.15
-	github.com/go-openapi/strfmt => github.com/go-openapi/strfmt v0.19.5
-	github.com/go-openapi/validate => github.com/go-openapi/validate v0.19.5
+	github.com/go-openapi/errors => github.com/go-openapi/errors v0.17.0
+	github.com/go-openapi/runtime => github.com/go-openapi/runtime v0.17.0
+	github.com/go-openapi/strfmt => github.com/go-openapi/strfmt v0.17.0
+	github.com/go-openapi/validate => github.com/go-openapi/validate v0.17.0
 )

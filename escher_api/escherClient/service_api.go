@@ -7,6 +7,7 @@ import (
 	auth2 "github.com/Portshift/escher-client/escher_api/auth"
 	model "github.com/Portshift/escher-client/escher_api/model"
 	"github.com/go-openapi/runtime"
+	"github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 	"io"
 	"log"
@@ -67,7 +68,7 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 type MgmtServiceApiCtx struct {
 	auth      runtime.ClientAuthInfoWriter
 	accessKey string
-	runtime   *auth2.Runtime
+	runtime   *client.Runtime
 }
 
 func CreateServiceApi(url, accessKey, secretKey string, client *http.Client) (*MgmtServiceApiCtx, error) {
@@ -78,14 +79,14 @@ func CreateServiceApi(url, accessKey, secretKey string, client *http.Client) (*M
 
 	apiCtx := createMgmtServiceApiCtx(url, client)
 
-	apiCtx.setServiceKeys(accessKey, secretKeyBytes)
+	apiCtx.setServiceKeys(url, accessKey, secretKeyBytes)
 
 	return apiCtx, nil
 }
 
 func createMgmtServiceApiCtx(mgmtHost string, httpClient *http.Client) *MgmtServiceApiCtx {
 	cfg := DefaultTransportConfig().WithHost(mgmtHost)
-	transport := auth2.NewWithClient(cfg.Host, cfg.BasePath, cfg.Schemes, httpClient)
+	transport := client.NewWithClient(cfg.Host, cfg.BasePath, cfg.Schemes, httpClient)
 
 	return &MgmtServiceApiCtx{
 		runtime: transport,
@@ -1096,9 +1097,9 @@ func (serviceMgmtApi *MgmtServiceApiCtx) deleteCdRuleIDDeploymentRule(params *mo
 	return nil, runtime.NewAPIError("delete deployment rule", msg, 400)
 }
 
-func (serviceMgmtApi *MgmtServiceApiCtx) setServiceKeys(accessKey string, secretKey []byte) {
+func (serviceMgmtApi *MgmtServiceApiCtx) setServiceKeys(mgmtHost string, accessKey string, secretKey []byte) {
 	secretKeyStr := base64.StdEncoding.EncodeToString(secretKey)
-	serviceMgmtApi.auth = auth2.NewAuth(accessKey, secretKeyStr, "global/services/portshift_request")
+	serviceMgmtApi.auth = auth2.NewAuth(accessKey, mgmtHost, DefaultBasePath, secretKeyStr, "global/services/portshift_request")
 	serviceMgmtApi.runtime.DefaultAuthentication = serviceMgmtApi.auth
 }
 
